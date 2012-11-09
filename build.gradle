@@ -1,0 +1,14 @@
+allprojects {
+    group   = "pl.helenium.amarum"
+    version = "0.1.0-SNAPSHOT"
+}
+
+subprojects {
+    apply plugin: "maven"
+    apply plugin: "groovy"
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
