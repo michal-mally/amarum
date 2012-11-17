@@ -1,3 +1,5 @@
 dependencies {
-    compile group: group, name: "api", version: version
+    compile project(':api')
+
+    compile group: "org.apache.commons", name: "commons-lang3", version: "3.+"
 }
