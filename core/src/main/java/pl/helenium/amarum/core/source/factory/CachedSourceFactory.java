@@ -1,12 +1,10 @@
-package pl.helenium.amarum.core;
+package pl.helenium.amarum.core.source.factory;
 
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.helenium.amarum.api.Source;
-import pl.helenium.amarum.api.SourceFactory;
-
-import java.util.Map;
+import pl.helenium.amarum.core.source.InMemorySource;
 
 public class CachedSourceFactory extends AbstractSourceFactory {
 

@@ -1,4 +1,4 @@
-package pl.helenium.amarum.core
+package pl.helenium.amarum.core.source.factory
 
 import org.testng.annotations.Test
 import pl.helenium.amarum.api.Source
@@ -7,6 +7,8 @@ import pl.helenium.amarum.api.SourceFactory
 
 import static org.mockito.Mockito.mock
 import static org.mockito.Mockito.when
+import pl.helenium.amarum.core.source.factory.AlternativeSourceFactory
+import pl.helenium.amarum.core.source.factory.WrappingSourceFactory
 
 class AlternativeSourceFactoryTest {
 

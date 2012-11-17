@@ -1,10 +1,12 @@
-package pl.helenium.amarum.core
+package pl.helenium.amarum.core.source.factory
 
 import org.testng.annotations.Test
 import pl.helenium.amarum.api.Source
 import pl.helenium.amarum.api.SourceCreationException
 
 import static org.mockito.Mockito.*
+import pl.helenium.amarum.core.source.InMemorySource
+import pl.helenium.amarum.core.source.factory.CachedSourceFactory
 
 class CachedSourceFactoryTest {
 

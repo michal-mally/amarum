@@ -1,16 +1,15 @@
-package pl.helenium.amarum.core;
+package pl.helenium.amarum.core.source;
 
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.helenium.amarum.api.Source;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static java.util.Collections.unmodifiableMap;
 
-public class InMemorySource implements Source {
+public class InMemorySource extends AbstractSource {
 
     private static final Logger log = LoggerFactory.getLogger(InMemorySource.class);
 
