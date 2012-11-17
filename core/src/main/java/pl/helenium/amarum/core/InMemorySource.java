@@ -26,11 +26,6 @@ public class InMemorySource implements Source {
     }
 
     @Override
-    public String get(String key) {
-        return this.map.get(key);
-    }
-
-    @Override
     public Map<String, String> getAll() {
         return unmodifiableMap(this.map);
     }

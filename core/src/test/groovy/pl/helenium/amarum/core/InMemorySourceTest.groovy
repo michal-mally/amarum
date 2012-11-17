@@ -28,30 +28,6 @@ class InMemorySourceTest {
     }
 
     @Test
-    void shallReturnNullIfKeyIsMissing() {
-        // given
-        def source = new InMemorySource([:])
-
-        // when
-        def value = source.get("NON_EXISTING_KEY")
-
-        // then
-        assert ! value
-    }
-
-    @Test
-    void shallReturnValueIfEntryIsPresent() {
-        // given
-        def source = new InMemorySource([someKey : "someValue"])
-
-        // when
-        def value = source.get("someKey")
-
-        // then
-        assert value == "someValue"
-    }
-
-    @Test
     void shallReturnMapWhenGetAll() {
         // given
         def sourceMap = [someKey: "someValue"]

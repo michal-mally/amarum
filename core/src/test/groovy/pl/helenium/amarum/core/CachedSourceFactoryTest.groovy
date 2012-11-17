@@ -1,16 +1,12 @@
 package pl.helenium.amarum.core
 
 import org.testng.annotations.Test
-import org.mockito.Mockito
 import pl.helenium.amarum.api.Source
+import pl.helenium.amarum.api.SourceCreationException
 
-import static org.mockito.Mockito.mock
-import static org.mockito.Mockito.verifyZeroInteractions
-import static org.mockito.Mockito.verify
-import static org.mockito.Mockito.times
-import static org.mockito.Matchers.anyString
+import static org.mockito.Mockito.*
 
-class CachingSourceTest {
+class CachedSourceFactoryTest {
 
     private static final String SOME_KEY = "someKey"
 
@@ -20,31 +16,35 @@ class CachingSourceTest {
         def backingSource = null
 
         // when
-        def source = new CachingSource(backingSource)
+        def factory = new CachedSourceFactory(backingSource)
+
+        // then
+        // exception expected
+    }
+
+    @Test(expectedExceptions = SourceCreationException.class)
+    void shallThrowSourceCreationExceptionWhenBackingSourceThrowsAnyException() {
+        // given
+        def backingSource = mock(Source.class)
+        when(backingSource.all).thenThrow(new RuntimeException())
+
+        def factory = new CachedSourceFactory(backingSource)
+
+        // when
+        factory.createSource()
 
         // then
         // exception expected
     }
 
     @Test
-    void shallReturnTheSameValuesAsBackingSourceWhenGetCall() {
-        // given
-        def backingSource = [(SOME_KEY): "someValue"] as InMemorySource
-
-        // when
-        def source = new CachingSource(backingSource)
-
-        // then
-        assert source.get(SOME_KEY) == backingSource.get(SOME_KEY)
-    }
-
-    @Test
     void shallReturnTheSameValuesAsBackingSourceWhenGetAllCall() {
         // given
         def backingSource = [(SOME_KEY): "someValue"] as InMemorySource
+        def factory = new CachedSourceFactory(backingSource)
 
         // when
-        def source = new CachingSource(backingSource)
+        def source = factory.createSource()
 
         // then
         assert source.all == backingSource.all
@@ -56,7 +56,7 @@ class CachingSourceTest {
         def backingSource = mock(Source.class)
 
         // when
-        def source = new CachingSource(backingSource)
+        new CachedSourceFactory(backingSource)
 
         // then
         verifyZeroInteractions(backingSource)
@@ -66,16 +66,14 @@ class CachingSourceTest {
     void shallNotInteractWithBackingSourceMoreThanOnce() {
         // given
         def backingSource = mock(Source.class)
-        def source = new CachingSource(backingSource)
+        def source = new CachedSourceFactory(backingSource).createSource()
 
         // when
-        source.get()
-        source.getAll()
+        source.all
+        source.all
 
         // then
-        verify(backingSource, times(0)).get(anyString())
-        verify(backingSource, times(1)).getAll()
+        verify(backingSource, times(1)).all
     }
-
 
 }
