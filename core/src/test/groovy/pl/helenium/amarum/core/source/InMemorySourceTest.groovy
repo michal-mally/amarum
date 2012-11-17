@@ -1,7 +1,6 @@
 package pl.helenium.amarum.core.source
 
 import org.testng.annotations.Test
-import pl.helenium.amarum.core.source.InMemorySource
 
 class InMemorySourceTest {
 

@@ -4,9 +4,10 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.helenium.amarum.api.Source;
-import pl.helenium.amarum.core.source.InMemorySource;
 
-public class CachedSourceFactory extends AbstractSourceFactory {
+import java.util.Map;
+
+public class CachedSourceFactory extends AbstractInMemorySourceFactory {
 
     private static final Logger log = LoggerFactory.getLogger(CachedSourceFactory.class);
 
@@ -18,8 +19,8 @@ public class CachedSourceFactory extends AbstractSourceFactory {
     }
 
     @Override
-    public Source doCreateSource() {
-        return new InMemorySource(this.backingSource.getAll());
+    protected void fillEntries(Map<String, String> entries) {
+        entries.putAll(this.backingSource.getAll());
     }
 
 }

@@ -1,12 +1,11 @@
 package pl.helenium.amarum.core.source.factory
 
 import org.testng.annotations.Test
+import pl.helenium.amarum.api.FactoryException
 import pl.helenium.amarum.api.Source
-import pl.helenium.amarum.api.SourceCreationException
+import pl.helenium.amarum.core.source.InMemorySource
 
 import static org.mockito.Mockito.*
-import pl.helenium.amarum.core.source.InMemorySource
-import pl.helenium.amarum.core.source.factory.CachedSourceFactory
 
 class CachedSourceFactoryTest {
 
@@ -24,7 +23,7 @@ class CachedSourceFactoryTest {
         // exception expected
     }
 
-    @Test(expectedExceptions = SourceCreationException.class)
+    @Test(expectedExceptions = FactoryException.class)
     void shallThrowSourceCreationExceptionWhenBackingSourceThrowsAnyException() {
         // given
         def backingSource = mock(Source.class)
@@ -33,7 +32,7 @@ class CachedSourceFactoryTest {
         def factory = new CachedSourceFactory(backingSource)
 
         // when
-        factory.createSource()
+        factory.produce()
 
         // then
         // exception expected
@@ -46,7 +45,7 @@ class CachedSourceFactoryTest {
         def factory = new CachedSourceFactory(backingSource)
 
         // when
-        def source = factory.createSource()
+        def source = factory.produce()
 
         // then
         assert source.all == backingSource.all
@@ -68,7 +67,7 @@ class CachedSourceFactoryTest {
     void shallNotInteractWithBackingSourceMoreThanOnce() {
         // given
         def backingSource = mock(Source.class)
-        def source = new CachedSourceFactory(backingSource).createSource()
+        def source = new CachedSourceFactory(backingSource).produce()
 
         // when
         source.all
