@@ -20,6 +20,9 @@ subprojects {
         compile group: 'org.slf4j', name: 'slf4j-api', version: '1.+'
 
         testCompile group: 'org.testng', name: 'testng', version: '6.+'
+        testCompile group: 'org.mockito', name: 'mockito-all', version: '1.+'
+
+        testRuntime group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'
     }
 
     test {

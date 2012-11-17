@@ -1,22 +1,24 @@
 package pl.helenium.amarum.core;
 
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.helenium.amarum.api.Source;
 
 import java.util.Map;
 
-public class CachingSource extends MapSource {
+public class CachingSource extends InMemorySource {
 
     private static final Logger log = LoggerFactory.getLogger(CachingSource.class);
 
-    private final Source source;
+    private final Source backingSource;
 
     private boolean initialized = false;
 
-    public CachingSource(Source source) {
+    public CachingSource(Source backingSource) {
         super();
-        this.source = source;
+        Validate.notNull(backingSource, "backingSource mustn't be null!");
+        this.backingSource = backingSource;
     }
 
     @Override
@@ -36,8 +38,8 @@ public class CachingSource extends MapSource {
             return;
         }
 
-        log.info("Initializing CachingSource using Source: {}", this.source);
-        final Map<String, String> entries = this.source.getAll();
+        log.info("Initializing CachingSource using Source: {}", this.backingSource);
+        final Map<String, String> entries = this.backingSource.getAll();
         for (Map.Entry<String, String> entry : entries.entrySet()) {
             log.info("Mapping {} -> {}", entry.getKey(), entry.getValue());
             this.map.put(entry.getKey(), entry.getValue());
