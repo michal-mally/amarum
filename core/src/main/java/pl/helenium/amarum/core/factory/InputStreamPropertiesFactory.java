@@ -1,6 +1,7 @@
 package pl.helenium.amarum.core.factory;
 
 import org.apache.commons.io.IOUtils;
+import pl.helenium.amarum.api.Factory;
 import pl.helenium.amarum.api.FactoryException;
 
 import java.io.IOException;
@@ -9,20 +10,21 @@ import java.util.Properties;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
-public class ClasspathPropertiesFactory extends AbstractFactory<Properties> {
+public class InputStreamPropertiesFactory extends AbstractFactory<Properties> {
 
-    private final String location;
+    private final Factory<InputStream> factory;
 
-    public ClasspathPropertiesFactory(String location) {
-        this.location = location;
+    public InputStreamPropertiesFactory(Factory<InputStream> factory) {
+        notNull(factory, "Factory mustn't be null!");
+        this.factory = factory;
     }
 
     @Override
     protected Properties doProduce() throws FactoryException {
         InputStream stream = null;
         try {
-            stream = getInputStream();
-            notNull(stream, "no resource available at classpath:%s", this.location);
+            stream = factory.produce();
+            notNull(stream, "Null InputStream produced by factory: %s", this.factory);
 
             final Properties properties = new Properties();
             properties.load(stream);
@@ -32,10 +34,6 @@ public class ClasspathPropertiesFactory extends AbstractFactory<Properties> {
         } finally {
             IOUtils.closeQuietly(stream);
         }
-    }
-
-    private InputStream getInputStream() {
-        return this.getClass().getResourceAsStream(this.location);
     }
 
 }
