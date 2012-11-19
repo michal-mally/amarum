@@ -6,12 +6,21 @@ import org.slf4j.LoggerFactory;
 import pl.helenium.amarum.api.Factory;
 import pl.helenium.amarum.api.FactoryException;
 
+import static org.apache.commons.lang3.Validate.notNull;
+
 public abstract class AbstractFactory<T> implements Factory<T> {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractFactory.class);
 
-    protected AbstractFactory() {
+    private final boolean allowNullProduct;
+
+    protected AbstractFactory(boolean allowNullProduct) {
         log.info("Creating {}", this.getClass().getName());
+        this.allowNullProduct = allowNullProduct;
+    }
+
+    protected AbstractFactory() {
+        this(false);
     }
 
     @Override
@@ -20,6 +29,10 @@ public abstract class AbstractFactory<T> implements Factory<T> {
         try {
             final T product = doProduce();
             log.debug("Object produced: {}", product);
+            if (!allowNullProduct) {
+                notNull(product, "Factory does not allow null product!");
+            }
+
             return product;
         } catch (RuntimeException e) {
             throw new FactoryException("Unable to produce object!", e);
