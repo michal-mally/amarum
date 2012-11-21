@@ -3,7 +3,7 @@ package pl.helenium.amarum.core.factory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.helenium.amarum.api.Factory;
-import pl.helenium.amarum.api.FactoryException;
+import pl.helenium.amarum.api.exception.FactoryException;
 
 import java.util.Arrays;
 

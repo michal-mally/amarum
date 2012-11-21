@@ -1,6 +1,6 @@
 package pl.helenium.amarum.core.factory;
 
-import pl.helenium.amarum.api.FactoryException;
+import pl.helenium.amarum.api.exception.FactoryException;
 
 import java.io.InputStream;
 
@@ -11,15 +11,15 @@ public class ClasspathInputStreamFactory extends AbstractFactory<InputStream> {
     private final String location;
 
     public ClasspathInputStreamFactory(String location) {
-        notNull(location, "Location mustn't be null!");
-        this.location = location;
+        this.location = notNull(location, "Location mustn't be null!");
     }
 
     @Override
     protected InputStream doProduce() throws FactoryException {
-        final InputStream stream = this.getClass().getResourceAsStream(this.location);
-        notNull(stream, "No resource at classpath:%s", this.location);
-        return stream;
+        return notNull(
+                this.getClass().getResourceAsStream(this.location),
+                "No resource at classpath:%s",
+                this.location);
     }
 
 }

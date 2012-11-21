@@ -19,12 +19,8 @@ public class FilterSourceFactory extends AbstractInMemorySourceFactory {
     private final Pattern[] patterns;
 
     public FilterSourceFactory(Factory<Source> factory, Pattern... patterns) {
-        notNull(factory);
-        this.factory = factory;
-
-        notEmpty(patterns);
-        noNullElements(patterns);
-        this.patterns = patterns;
+        this.factory = notNull(factory);
+        this.patterns = noNullElements(notEmpty(patterns));
     }
 
     @Override

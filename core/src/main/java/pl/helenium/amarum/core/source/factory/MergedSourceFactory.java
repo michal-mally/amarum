@@ -17,9 +17,7 @@ public class MergedSourceFactory extends AbstractInMemorySourceFactory {
     private final Factory<Source>[] factories;
 
     public MergedSourceFactory(Factory<Source>... factories) {
-        notNull(factories);
-        noNullElements(factories);
-        this.factories = factories;
+        this.factories = noNullElements(notNull(factories));
     }
 
     @Override

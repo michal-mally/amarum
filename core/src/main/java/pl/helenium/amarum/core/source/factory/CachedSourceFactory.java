@@ -15,8 +15,7 @@ public class CachedSourceFactory extends AbstractInMemorySourceFactory {
     private final Source backingSource;
 
     public CachedSourceFactory(Source backingSource) {
-        notNull(backingSource, "backingSource mustn't be null!");
-        this.backingSource = backingSource;
+        this.backingSource = notNull(backingSource, "backingSource mustn't be null!");
     }
 
     @Override

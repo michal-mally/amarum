@@ -1,7 +1,7 @@
 package pl.helenium.amarum.core.source.factory;
 
 import pl.helenium.amarum.api.Factory;
-import pl.helenium.amarum.api.FactoryException;
+import pl.helenium.amarum.api.exception.FactoryException;
 
 import java.util.Map;
 import java.util.Properties;
@@ -13,8 +13,7 @@ public class PropertiesSourceFactory extends AbstractInMemorySourceFactory {
     private final Factory<Properties> propertiesFactory;
 
     public PropertiesSourceFactory(Factory<Properties> propertiesFactory) {
-        notNull(propertiesFactory);
-        this.propertiesFactory = propertiesFactory;
+        this.propertiesFactory = notNull(propertiesFactory);
     }
 
     @Override

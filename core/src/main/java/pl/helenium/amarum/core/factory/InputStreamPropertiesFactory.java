@@ -2,7 +2,7 @@ package pl.helenium.amarum.core.factory;
 
 import org.apache.commons.io.IOUtils;
 import pl.helenium.amarum.api.Factory;
-import pl.helenium.amarum.api.FactoryException;
+import pl.helenium.amarum.api.exception.FactoryException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,16 +15,14 @@ public class InputStreamPropertiesFactory extends AbstractFactory<Properties> {
     private final Factory<InputStream> factory;
 
     public InputStreamPropertiesFactory(Factory<InputStream> factory) {
-        notNull(factory, "Factory mustn't be null!");
-        this.factory = factory;
+        this.factory = notNull(factory, "Factory mustn't be null!");
     }
 
     @Override
     protected Properties doProduce() throws FactoryException {
         InputStream stream = null;
         try {
-            stream = factory.produce();
-            notNull(stream, "Null InputStream produced by factory: %s", this.factory);
+            stream = notNull(factory.produce(), "Null InputStream produced by factory: %s", this.factory);
 
             final Properties properties = new Properties();
             properties.load(stream);

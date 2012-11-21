@@ -1,6 +1,6 @@
-package pl.helenium.amarum.api;
+package pl.helenium.amarum.api.exception;
 
-public class FactoryException extends Exception {
+public class FactoryException extends AmarumException {
 
     public FactoryException(String message) {
         super(message);

@@ -16,8 +16,7 @@ public class InMemorySource extends AbstractSource {
     protected final Map<String, String> map;
 
     public InMemorySource(Map<String, String> map) {
-        notNull(map, "map parameter mustn't be null");
-        this.map = map;
+        this.map = notNull(map, "map parameter mustn't be null");
     }
 
     public InMemorySource() {

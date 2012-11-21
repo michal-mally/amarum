@@ -2,8 +2,8 @@ package pl.helenium.amarum.core.source.factory
 
 import org.testng.annotations.Test
 import pl.helenium.amarum.api.Factory
-import pl.helenium.amarum.api.FactoryException
 import pl.helenium.amarum.api.Source
+import pl.helenium.amarum.api.exception.FactoryException
 import pl.helenium.amarum.core.factory.WrappingFactory
 import pl.helenium.amarum.core.source.InMemorySource
 
