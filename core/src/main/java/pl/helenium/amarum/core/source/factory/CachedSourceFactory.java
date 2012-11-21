@@ -1,11 +1,12 @@
 package pl.helenium.amarum.core.source.factory;
 
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.helenium.amarum.api.Source;
 
 import java.util.Map;
+
+import static org.apache.commons.lang3.Validate.notNull;
 
 public class CachedSourceFactory extends AbstractInMemorySourceFactory {
 
@@ -14,7 +15,7 @@ public class CachedSourceFactory extends AbstractInMemorySourceFactory {
     private final Source backingSource;
 
     public CachedSourceFactory(Source backingSource) {
-        Validate.notNull(backingSource, "backingSource mustn't be null!");
+        notNull(backingSource, "backingSource mustn't be null!");
         this.backingSource = backingSource;
     }
 

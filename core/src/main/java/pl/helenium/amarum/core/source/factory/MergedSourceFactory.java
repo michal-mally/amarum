@@ -1,12 +1,14 @@
 package pl.helenium.amarum.core.source.factory;
 
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.helenium.amarum.api.Factory;
 import pl.helenium.amarum.api.Source;
 
 import java.util.Map;
+
+import static org.apache.commons.lang3.Validate.noNullElements;
+import static org.apache.commons.lang3.Validate.notNull;
 
 public class MergedSourceFactory extends AbstractInMemorySourceFactory {
 
@@ -15,8 +17,8 @@ public class MergedSourceFactory extends AbstractInMemorySourceFactory {
     private final Factory<Source>[] factories;
 
     public MergedSourceFactory(Factory<Source>... factories) {
-        Validate.notNull(factories);
-        Validate.noNullElements(factories);
+        notNull(factories);
+        noNullElements(factories);
         this.factories = factories;
     }
 

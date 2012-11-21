@@ -1,6 +1,5 @@
 package pl.helenium.amarum.core.source;
 
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static java.util.Collections.unmodifiableMap;
+import static org.apache.commons.lang3.Validate.notNull;
 
 public class InMemorySource extends AbstractSource {
 
@@ -16,7 +16,7 @@ public class InMemorySource extends AbstractSource {
     protected final Map<String, String> map;
 
     public InMemorySource(Map<String, String> map) {
-        Validate.notNull(map, "map parameter mustn't be null");
+        notNull(map, "map parameter mustn't be null");
         this.map = map;
     }
 

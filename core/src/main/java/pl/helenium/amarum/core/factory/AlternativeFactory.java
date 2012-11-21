@@ -1,12 +1,14 @@
 package pl.helenium.amarum.core.factory;
 
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.helenium.amarum.api.Factory;
 import pl.helenium.amarum.api.FactoryException;
 
 import java.util.Arrays;
+
+import static org.apache.commons.lang3.Validate.noNullElements;
+import static org.apache.commons.lang3.Validate.notEmpty;
 
 public class AlternativeFactory<T> extends AbstractFactory<T> {
 
@@ -15,8 +17,8 @@ public class AlternativeFactory<T> extends AbstractFactory<T> {
     private final Factory<T>[] factories;
 
     public AlternativeFactory(Factory<T>... factories) {
-        Validate.notEmpty(factories);
-        Validate.noNullElements(factories);
+        notEmpty(factories);
+        noNullElements(factories);
         this.factories = factories;
         log.info("Creating {} with Factories: {}", this.getClass().getSimpleName(), Arrays.toString(factories));
     }
