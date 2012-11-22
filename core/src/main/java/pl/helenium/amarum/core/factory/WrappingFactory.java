@@ -11,6 +11,7 @@ public class WrappingFactory<T> extends AbstractFactory<T> {
     private final T product;
 
     public WrappingFactory(T product) {
+        super(true);
         this.product = product;
         if (product == null) {
             log.warn("Product is null!");
