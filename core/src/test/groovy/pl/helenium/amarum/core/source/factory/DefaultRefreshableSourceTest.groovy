@@ -10,7 +10,7 @@ import pl.helenium.amarum.core.source.InMemorySource
 import static org.mockito.Mockito.mock
 import static org.mockito.Mockito.when
 
-class RefreshableSourceTest {
+class DefaultRefreshableSourceTest {
 
     @Test(expectedExceptions = NullPointerException.class)
     void shallThrowExceptionIfFactoryIsNull() {
@@ -18,7 +18,7 @@ class RefreshableSourceTest {
         def factory = null
 
         // when
-        new RefreshableSource(factory)
+        new DefaultRefreshableSource(factory)
 
         // then
         // exception expected
@@ -31,7 +31,7 @@ class RefreshableSourceTest {
         when(factory.produce()).thenReturn(null)
 
         // when
-        new RefreshableSource(factory)
+        new DefaultRefreshableSource(factory)
 
         // then
         // exception expected
@@ -42,7 +42,7 @@ class RefreshableSourceTest {
         // given
         def factory = mock(Factory.class)
         when(factory.produce()).thenReturn([:] as InMemorySource)
-        def refreshable = new RefreshableSource(factory)
+        def refreshable = new DefaultRefreshableSource(factory)
 
         // when
         when(factory.produce()).thenThrow(new RuntimeException())
@@ -59,7 +59,7 @@ class RefreshableSourceTest {
         def factory = new WrappingFactory<Source>(backingMap as InMemorySource)
 
         // when
-        def refreshable = new RefreshableSource(factory)
+        def refreshable = new DefaultRefreshableSource(factory)
 
         // then
         assert refreshable.all == backingMap
@@ -70,7 +70,7 @@ class RefreshableSourceTest {
         // given
         def backingMap = [a: 'av']
         def factory = new WrappingFactory<Source>(backingMap as InMemorySource)
-        def refreshable = new RefreshableSource(factory)
+        def refreshable = new DefaultRefreshableSource(factory)
 
         // when
         backingMap.b = 'bv'
@@ -86,7 +86,7 @@ class RefreshableSourceTest {
         def factory = mock(Factory.class)
         when(factory.produce()).thenReturn(backingMap1 as InMemorySource)
 
-        def refreshable = new RefreshableSource(factory)
+        def refreshable = new DefaultRefreshableSource(factory)
 
         // when
         def backingMap2 = [b: 'bv']
@@ -103,7 +103,7 @@ class RefreshableSourceTest {
         def factory = mock(Factory.class)
         when(factory.produce()).thenReturn(backingMap1 as InMemorySource)
 
-        def refreshable = new RefreshableSource(factory)
+        def refreshable = new DefaultRefreshableSource(factory)
 
         // when
         def backingMap2 = [b: 'bv']

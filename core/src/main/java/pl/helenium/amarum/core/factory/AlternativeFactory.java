@@ -27,17 +27,17 @@ public class AlternativeFactory<T> extends AbstractFactory<T> {
     public T doProduce() throws FactoryException {
         for (Factory<T> factory : factories) {
             try {
-                log.debug("Trying to produce object using Factory: {}", factory);
+                log.debug("Trying to create product using Factory: {}", factory);
 
-                final T object = factory.produce();
-                log.info("Object {} created with Factory {}", object, factory);
-                return object;
+                final T product = factory.produce();
+                log.info("Product {} created with Factory {}", product, factory);
+                return product;
             } catch (Exception e) {
-                log.info(String.format("Unable to produce object using Factory: %s. Will try next factory if available!", factory), e);
+                log.info(String.format("Unable to create product using Factory: %s. Will try next factory if available!", factory), e);
             }
         }
 
-        throw new FactoryException("Unable to produce object! All factories have failed!");
+        throw new FactoryException("Unable to create product! All factories have failed!");
     }
 
 }

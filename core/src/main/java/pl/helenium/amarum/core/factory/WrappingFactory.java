@@ -1,20 +1,25 @@
 package pl.helenium.amarum.core.factory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.helenium.amarum.api.exception.FactoryException;
-
-import static org.apache.commons.lang3.Validate.notNull;
 
 public class WrappingFactory<T> extends AbstractFactory<T> {
 
-    private final T object;
+    private static final Logger log = LoggerFactory.getLogger(WrappingFactory.class);
 
-    public WrappingFactory(T object) {
-        this.object = notNull(object);
+    private final T product;
+
+    public WrappingFactory(T product) {
+        this.product = product;
+        if (product == null) {
+            log.warn("Product is null!");
+        }
     }
 
     @Override
     protected T doProduce() throws FactoryException {
-        return this.object;
+        return this.product;
     }
 
 }

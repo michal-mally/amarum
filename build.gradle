@@ -9,6 +9,10 @@ subprojects {
     apply plugin: "maven"
     apply plugin: "groovy"
 
+    project.ext.versions = [
+            spring: '3.1.+',
+    ]
+
     repositories {
         mavenLocal()
         mavenCentral()
@@ -19,8 +23,11 @@ subprojects {
 
         compile group: 'org.slf4j', name: 'slf4j-api', version: '1.+'
 
-        testCompile group: 'org.testng', name: 'testng', version: '6.+'
-        testCompile group: 'org.mockito', name: 'mockito-all', version: '1.+'
+        testCompile (
+                [group: 'org.testng', name: 'testng', version: '6.+'],
+                [group: 'org.mockito', name: 'mockito-all', version: '1.+'],
+                [group: 'org.springframework', name: 'spring-test', version: versions.spring],
+        )
 
         testRuntime group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'
     }

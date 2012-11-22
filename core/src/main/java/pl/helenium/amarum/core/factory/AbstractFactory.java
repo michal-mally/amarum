@@ -35,7 +35,7 @@ public abstract class AbstractFactory<T> implements Factory<T> {
 
             return product;
         } catch (RuntimeException e) {
-            throw new FactoryException("Unable to produce object!", e);
+            throw new FactoryException("Unable to create product!", e);
         }
     }
 
