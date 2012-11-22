@@ -1,6 +1,8 @@
-package pl.helenium.amarum.core.factory
+package pl.helenium.amarum.core.factory.properties
 
 import org.testng.annotations.Test
+import pl.helenium.amarum.core.factory.WrappingFactory
+import pl.helenium.amarum.core.factory.stream.input.ClasspathInputStreamFactory
 
 class InputStreamPropertiesFactoryTest {
 

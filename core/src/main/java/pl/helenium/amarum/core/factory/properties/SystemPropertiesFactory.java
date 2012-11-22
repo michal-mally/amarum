@@ -1,6 +1,7 @@
-package pl.helenium.amarum.core.factory;
+package pl.helenium.amarum.core.factory.properties;
 
 import pl.helenium.amarum.api.exception.FactoryException;
+import pl.helenium.amarum.core.factory.AbstractFactory;
 
 import java.util.Properties;
 

@@ -1,4 +1,4 @@
-package pl.helenium.amarum.core.factory
+package pl.helenium.amarum.core.factory.properties
 
 import org.testng.annotations.Test
 

@@ -1,4 +1,4 @@
-package pl.helenium.amarum.core.source.factory;
+package pl.helenium.amarum.core.factory.source;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

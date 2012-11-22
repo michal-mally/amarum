@@ -1,6 +1,11 @@
 dependencies {
-    compile project(':api')
 
-    compile group: "org.apache.commons", name: "commons-lang3", version: "3.+"
-    compile group: "commons-io", name: "commons-io", version: "2.+"
+    compile (
+            project(':api'),
+
+            [group: 'org.apache.commons', name: 'commons-lang3', version: '3.+'],
+            [group: 'commons-io', name: 'commons-io', version: '2.+'],
+            [group: 'commons-beanutils', name: 'commons-beanutils', version: '1.+']
+    )
+
 }
