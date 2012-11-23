@@ -5,7 +5,7 @@ dependencies {
 
             [group: 'org.apache.commons', name: 'commons-lang3', version: '3.+'],
             [group: 'commons-io', name: 'commons-io', version: '2.+'],
-            [group: 'commons-beanutils', name: 'commons-beanutils', version: '1.+']
+            [group: 'commons-beanutils', name: 'commons-beanutils', version: '1.+', transitive: false]
     )
 
 }
