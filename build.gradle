@@ -8,6 +8,7 @@ allprojects {
 subprojects {
     apply plugin: "maven"
     apply plugin: "groovy"
+    apply plugin: "sonar"
 
     project.ext.versions = [
             slf4j: '1.+',
@@ -38,6 +39,18 @@ subprojects {
 
     test {
         useTestNG()
+    }
+
+    sonar {
+        server {
+            url = "http://sonar.mally.pl/"
+        }
+        database {
+            url = "jdbc:postgresql://localhost/sonar"
+            driverClassName = "org.postgresql.Driver"
+            username = "sonar"
+            password = "sonar"
+        }
     }
 
 }
