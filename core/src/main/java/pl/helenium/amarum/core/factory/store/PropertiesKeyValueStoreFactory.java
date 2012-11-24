@@ -1,6 +1,6 @@
-package pl.helenium.amarum.core.factory.source;
+package pl.helenium.amarum.core.factory.store;
 
-import pl.helenium.amarum.api.Factory;
+import pl.helenium.amarum.api.factory.Factory;
 import pl.helenium.amarum.api.exception.FactoryException;
 
 import java.util.Map;
@@ -8,11 +8,11 @@ import java.util.Properties;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
-public class PropertiesSourceFactory extends AbstractInMemorySourceFactory {
+public class PropertiesKeyValueStoreFactory extends AbstractInMemoryKeyValueStoreFactory {
 
     private final Factory<Properties> propertiesFactory;
 
-    public PropertiesSourceFactory(Factory<Properties> propertiesFactory) {
+    public PropertiesKeyValueStoreFactory(Factory<Properties> propertiesFactory) {
         this.propertiesFactory = notNull(propertiesFactory);
     }
 

@@ -1,4 +1,4 @@
-package pl.helenium.amarum.api;
+package pl.helenium.amarum.api.factory;
 
 import pl.helenium.amarum.api.exception.FactoryException;
 

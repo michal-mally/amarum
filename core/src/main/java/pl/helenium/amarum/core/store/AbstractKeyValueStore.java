@@ -1,15 +1,15 @@
-package pl.helenium.amarum.core.source;
+package pl.helenium.amarum.core.store;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.helenium.amarum.api.Source;
+import pl.helenium.amarum.api.store.KeyValueStore;
 
-public abstract class AbstractSource implements Source {
+public abstract class AbstractKeyValueStore implements KeyValueStore {
 
-    private static final Logger log = LoggerFactory.getLogger(AbstractSource.class);
+    private static final Logger log = LoggerFactory.getLogger(AbstractKeyValueStore.class);
 
-    protected AbstractSource() {
+    protected AbstractKeyValueStore() {
         log.info("Creating {}", this.getClass().getName());
     }
 

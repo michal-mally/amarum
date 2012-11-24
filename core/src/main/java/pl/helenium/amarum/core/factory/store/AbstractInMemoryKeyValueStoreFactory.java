@@ -1,27 +1,28 @@
-package pl.helenium.amarum.core.factory.source;
+package pl.helenium.amarum.core.factory.store;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.helenium.amarum.api.Source;
 import pl.helenium.amarum.api.exception.FactoryException;
+import pl.helenium.amarum.api.store.KeyValueStore;
 import pl.helenium.amarum.core.factory.AbstractFactory;
-import pl.helenium.amarum.core.source.InMemorySource;
+import pl.helenium.amarum.core.store.InMemoryKeyValueStore;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 
-public abstract class AbstractInMemorySourceFactory extends AbstractFactory<Source> {
+public abstract class AbstractInMemoryKeyValueStoreFactory extends AbstractFactory<KeyValueStore> {
 
-    private static final Logger log = LoggerFactory.getLogger(AbstractInMemorySourceFactory.class);
+    private static final Logger log = LoggerFactory.getLogger(AbstractInMemoryKeyValueStoreFactory.class);
 
     @Override
-    protected final Source doProduce() throws FactoryException {
+    protected final KeyValueStore doProduce() throws FactoryException {
         try {
             log.debug("Delegating creation of entries to {}.fillEntries()", this.getClass().getSimpleName());
-            final Map<String, String> entries = new HashMap<String, String>();
+            final NavigableMap<String, String> entries = new TreeMap<String, String>();
             fillEntries(entries);
             log.info("Entries returned by fillEntries(): {}", entries);
-            return new InMemorySource(entries);
+            return new InMemoryKeyValueStore(entries);
         } catch (Exception e) {
             throw new FactoryException("Unable to produce object!", e);
         }

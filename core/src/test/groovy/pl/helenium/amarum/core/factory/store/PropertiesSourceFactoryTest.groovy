@@ -1,14 +1,15 @@
-package pl.helenium.amarum.core.factory.source
+package pl.helenium.amarum.core.factory.store
 
 import org.testng.annotations.Test
-import pl.helenium.amarum.api.Factory
 import pl.helenium.amarum.api.exception.FactoryException
+import pl.helenium.amarum.api.factory.Factory
 import pl.helenium.amarum.core.factory.WrappingFactory
 
 import static org.mockito.Mockito.mock
 import static org.mockito.Mockito.when
+import static pl.helenium.amarum.core.store.KeyValueStoreUtils.asMap
 
-class PropertiesSourceFactoryTest {
+class PropertiesKeyValueStoreFactoryTest {
 
     @Test(expectedExceptions = NullPointerException.class)
     void shallThrowExceptionWhenNullFactoryIsPassed() {
@@ -16,7 +17,7 @@ class PropertiesSourceFactoryTest {
         def propertiesFactory = null
 
         // when
-        new PropertiesSourceFactory(propertiesFactory)
+        new PropertiesKeyValueStoreFactory(propertiesFactory)
 
         // then
         // exception expected
@@ -28,7 +29,7 @@ class PropertiesSourceFactoryTest {
         def propertiesFactory = mock(Factory.class)
         when(propertiesFactory.produce()).thenThrow(new RuntimeException())
 
-        def factory = new PropertiesSourceFactory(propertiesFactory);
+        def factory = new PropertiesKeyValueStoreFactory(propertiesFactory);
 
         // when
         factory.produce()
@@ -38,17 +39,17 @@ class PropertiesSourceFactoryTest {
     }
 
     @Test
-    void shallReturnSourceContainingAllEntriesFromProperties() {
+    void shallReturnKeyValueStoreContainingAllEntriesFromProperties() {
         // given
         def map = [a: 'av', b: 'bv']
         def properties = new Properties()
         map.each { k, v -> properties.setProperty(k, v) }
 
         // when
-        def factory = new PropertiesSourceFactory(properties as WrappingFactory)
+        def factory = new PropertiesKeyValueStoreFactory(properties as WrappingFactory)
 
         // then
-        assert factory.produce().all == map
+        assert asMap(factory.produce()) == map
     }
 
 }
