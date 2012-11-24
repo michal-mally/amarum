@@ -1,14 +1,14 @@
 allprojects {
-    apply plugin: "idea"
+    apply plugin: 'idea'
 
-    group   = "pl.helenium.amarum"
-    version = "0.1.0-SNAPSHOT"
+    group   = 'pl.helenium.amarum'
+    version = '0.1.0-SNAPSHOT'
 }
 
 subprojects {
-    apply plugin: "maven"
-    apply plugin: "groovy"
-    apply plugin: "sonar"
+    apply plugin: 'maven'
+    apply plugin: 'groovy'
+    apply plugin: 'sonar'
 
     project.ext.versions = [
             slf4j: '1.+',
@@ -43,13 +43,13 @@ subprojects {
 
     sonar {
         server {
-            url = "http://sonar.mally.pl/"
+            url = 'http://sonar.mally.pl/'
         }
         database {
-            url = "jdbc:postgresql://localhost/sonar"
-            driverClassName = "org.postgresql.Driver"
-            username = "sonar"
-            password = "sonar"
+            url = 'jdbc:postgresql://localhost/sonar'
+            driverClassName = 'org.postgresql.Driver'
+            username = 'sonar'
+            password = 'sonar'
         }
     }
 
