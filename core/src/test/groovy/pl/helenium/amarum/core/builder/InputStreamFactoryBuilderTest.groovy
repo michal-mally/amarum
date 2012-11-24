@@ -3,14 +3,14 @@ package pl.helenium.amarum.core.builder
 import org.testng.annotations.Test
 import pl.helenium.amarum.api.exception.BuildException
 
-import static pl.helenium.amarum.core.builder.Builders.inputStreamFactory
+import static pl.helenium.amarum.core.builder.Builders.build
 
 class InputStreamFactoryBuilderTest {
 
     @Test(expectedExceptions = BuildException.class)
     void shallThrowBuildExceptionWhenSettingNonExistingPropertyWithIgnoreFlagSetToFalse() {
         // given
-        inputStreamFactory()
+        build().inputStreamFactory()
                 .with("non-existing", "value")
 
         // when
@@ -23,7 +23,7 @@ class InputStreamFactoryBuilderTest {
     @Test
     void shallIgnoreNonExistingPropertyWithIgnoreFlagSetToTrue() {
         // given
-        def factory = inputStreamFactory()
+        def factory = build().inputStreamFactory()
                 .ignoreNonExistingProperties()
                 .with("non-existing", "value")
 
@@ -37,7 +37,7 @@ class InputStreamFactoryBuilderTest {
     @Test
     void shallProduceInputStreamConnectedToPointedResource() {
         // given
-        def factory = inputStreamFactory()
+        def factory = build().inputStreamFactory()
 
         // when
                 .fromClasspath('/test.properties')

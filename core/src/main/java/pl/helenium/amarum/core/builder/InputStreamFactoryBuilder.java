@@ -7,7 +7,7 @@ import pl.helenium.amarum.core.factory.stream.input.FileInputStreamFactory;
 
 import java.io.InputStream;
 
-public class InputStreamFactoryBuilder extends AbstractBuilder<Factory<InputStream>, InputStreamFactoryBuilder> {
+public class InputStreamFactoryBuilder extends AbstractBuilder<InputStreamFactoryBuilder> {
 
     public Factory<InputStream> fromClasspath(String location) throws BuildException {
         return configure(new ClasspathInputStreamFactory(location));

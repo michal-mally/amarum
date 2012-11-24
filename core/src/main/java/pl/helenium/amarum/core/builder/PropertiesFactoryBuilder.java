@@ -8,7 +8,7 @@ import pl.helenium.amarum.core.factory.properties.SystemPropertiesFactory;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class PropertiesFactoryBuilder extends AbstractBuilder<Factory<Properties>, PropertiesFactoryBuilder>{
+public class PropertiesFactoryBuilder extends AbstractBuilder<PropertiesFactoryBuilder>{
 
     public Factory<Properties> fromSystem() throws BuildException {
         return configure(new SystemPropertiesFactory());

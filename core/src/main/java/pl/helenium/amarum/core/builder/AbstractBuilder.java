@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
-public abstract class AbstractBuilder<P, B extends AbstractBuilder> implements Builder<B> {
+public abstract class AbstractBuilder<B extends AbstractBuilder> implements Builder<B> {
 
     @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(AbstractBuilder.class);
@@ -34,7 +34,7 @@ public abstract class AbstractBuilder<P, B extends AbstractBuilder> implements B
 
     protected abstract B getThis();
 
-    protected P configure(P product) throws BuildException {
+    protected <T> T configure(T product) throws BuildException {
         try {
             notNull(product, "Constructed object can't be null!");
             setExtraProperties(product);
@@ -44,15 +44,13 @@ public abstract class AbstractBuilder<P, B extends AbstractBuilder> implements B
         }
     }
 
-    private P setExtraProperties(P product) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+    private void setExtraProperties(Object product) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         for (Map.Entry<String, Object> property : extraProperties.entrySet()) {
             setExtraProperty(product, property.getKey(), property.getValue());
         }
-
-        return product;
     }
 
-    private void setExtraProperty(P product, String propertyName, Object value) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+    private void setExtraProperty(Object product, String propertyName, Object value) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         log.debug("Setting extra property {} -> {} @ {}", propertyName, value, product);
         try {
             PropertyUtils.setProperty(product, propertyName, value);

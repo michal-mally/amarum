@@ -1,0 +1,32 @@
+package pl.helenium.amarum.core.builder;
+
+import pl.helenium.amarum.api.exception.BuildException;
+import pl.helenium.amarum.api.factory.Factory;
+import pl.helenium.amarum.api.store.KeyValueStore;
+import pl.helenium.amarum.core.factory.store.FilterKeyValueStoreFactory;
+import pl.helenium.amarum.core.factory.store.MergedKeyValueStoreFactory;
+import pl.helenium.amarum.core.factory.store.PropertiesKeyValueStoreFactory;
+
+import java.util.Properties;
+import java.util.regex.Pattern;
+
+public class KeyValueStoreFactoryBuilder extends AbstractBuilder<KeyValueStoreFactoryBuilder>{
+
+    public Factory<KeyValueStore> fromProperties(Factory<Properties> factory) throws BuildException {
+        return configure(new PropertiesKeyValueStoreFactory(factory));
+    }
+
+    public Factory<KeyValueStore> filter(Factory<KeyValueStore> factory, Pattern... patterns) throws BuildException {
+        return configure(new FilterKeyValueStoreFactory(factory, patterns));
+    }
+
+    public Factory<KeyValueStore> merge(Factory<KeyValueStore>... factories) throws BuildException {
+        return configure(new MergedKeyValueStoreFactory(factories));
+    }
+
+    @Override
+    protected KeyValueStoreFactoryBuilder getThis() {
+        return this;
+    }
+
+}
