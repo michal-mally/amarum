@@ -34,4 +34,19 @@ class InputStreamFactoryBuilderTest {
         assert factory.produce()
     }
 
+    @Test
+    void shallProduceInputStreamConnectedToPointedResource() {
+        // given
+        def factory = inputStreamFactory()
+
+        // when
+                .fromClasspath('/test.properties')
+
+        // then
+        assert factory.produce().text == """property1.x=p1v
+property1.y=p1y
+property2.x=p2x
+"""
+    }
+
 }
