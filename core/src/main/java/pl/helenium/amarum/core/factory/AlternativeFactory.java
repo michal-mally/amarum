@@ -12,6 +12,7 @@ import static org.apache.commons.lang3.Validate.notEmpty;
 
 public class AlternativeFactory<T> extends AbstractFactory<T> {
 
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(AlternativeFactory.class);
 
     private final Factory<T>[] factories;

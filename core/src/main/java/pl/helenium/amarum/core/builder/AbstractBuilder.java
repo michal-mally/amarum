@@ -13,6 +13,7 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public abstract class AbstractBuilder<P, B extends AbstractBuilder> implements Builder<B> {
 
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(AbstractBuilder.class);
 
     private final Map<String, Object> extraProperties = new HashMap<String, Object>();

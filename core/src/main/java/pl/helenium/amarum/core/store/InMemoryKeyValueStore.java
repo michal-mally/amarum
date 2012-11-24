@@ -10,9 +10,10 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public class InMemoryKeyValueStore extends AbstractKeyValueStore {
 
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(InMemoryKeyValueStore.class);
 
-    protected final Map<String, String> map;
+    private final Map<String, String> map;
 
     public InMemoryKeyValueStore(Map<String, String> map) {
         this.map = notNull(map, "map parameter mustn't be null");

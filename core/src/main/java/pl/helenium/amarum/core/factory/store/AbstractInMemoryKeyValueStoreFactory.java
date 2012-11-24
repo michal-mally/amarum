@@ -13,6 +13,7 @@ import java.util.TreeMap;
 
 public abstract class AbstractInMemoryKeyValueStoreFactory extends AbstractFactory<KeyValueStore> {
 
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(AbstractInMemoryKeyValueStoreFactory.class);
 
     @Override

@@ -12,6 +12,7 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public class MergedKeyValueStoreFactory extends AbstractInMemoryKeyValueStoreFactory {
 
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(MergedKeyValueStoreFactory.class);
 
     private final Factory<KeyValueStore>[] factories;

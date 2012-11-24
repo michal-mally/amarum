@@ -12,6 +12,7 @@ import static org.apache.commons.lang3.Validate.*;
 
 public class FilterKeyValueStoreFactory extends AbstractInMemoryKeyValueStoreFactory {
 
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(FilterKeyValueStoreFactory.class);
 
     private final Factory<KeyValueStore> factory;

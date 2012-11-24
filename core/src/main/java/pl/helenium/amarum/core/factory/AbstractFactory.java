@@ -10,6 +10,7 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public abstract class AbstractFactory<T> implements Factory<T> {
 
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(AbstractFactory.class);
 
     private final boolean allowNullProduct;

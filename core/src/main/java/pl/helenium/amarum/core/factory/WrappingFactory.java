@@ -6,6 +6,7 @@ import pl.helenium.amarum.api.exception.FactoryException;
 
 public class WrappingFactory<T> extends AbstractFactory<T> {
 
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(WrappingFactory.class);
 
     private final T product;

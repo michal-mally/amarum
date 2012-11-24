@@ -7,6 +7,7 @@ import pl.helenium.amarum.api.store.KeyValueStore;
 
 public abstract class AbstractKeyValueStore implements KeyValueStore {
 
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(AbstractKeyValueStore.class);
 
     protected AbstractKeyValueStore() {

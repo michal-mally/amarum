@@ -11,6 +11,7 @@ import static pl.helenium.amarum.core.store.KeyValueStoreUtils.asMap;
 
 public class CachedKeyValueStoreFactory extends AbstractInMemoryKeyValueStoreFactory {
 
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(CachedKeyValueStoreFactory.class);
 
     private final KeyValueStore backingKeyValueStore;
