@@ -56,7 +56,7 @@ class DefaultRefreshableKeyValueStoreTest {
     @Test
     void shallReturnSameEntriesAsUnderlyingKeyValueStoreFactory() {
         // given
-        def backingMap = [a: 'av'] as TreeMap
+        def backingMap = [a: 'av']
         def factory = new WrappingFactory<KeyValueStore>(backingMap as InMemoryKeyValueStore)
 
         // when
@@ -69,7 +69,7 @@ class DefaultRefreshableKeyValueStoreTest {
     @Test
     void shallReflectChangesToKeyValueStoreIfNotRefreshed() {
         // given
-        def backingMap = [a: 'av'] as TreeMap
+        def backingMap = [a: 'av']
         def factory = new WrappingFactory<KeyValueStore>(backingMap as InMemoryKeyValueStore)
         def refreshable = new DefaultRefreshableKeyValueStore(factory)
 
@@ -83,7 +83,7 @@ class DefaultRefreshableKeyValueStoreTest {
     @Test
     void shallNotReflectChangesToFactoryIfNotRefreshed() {
         // given
-        def backingMap1 = [a: 'av'] as TreeMap
+        def backingMap1 = [a: 'av']
         def factory = mock(Factory.class)
         when(factory.produce()).thenReturn(backingMap1 as InMemoryKeyValueStore)
 
@@ -100,14 +100,14 @@ class DefaultRefreshableKeyValueStoreTest {
     @Test
     void shallReflectChangesToFactoryIfRefreshed() {
         // given
-        def backingMap1 = [a: 'av'] as TreeMap
+        def backingMap1 = [a: 'av']
         def factory = mock(Factory.class)
         when(factory.produce()).thenReturn(backingMap1 as InMemoryKeyValueStore)
 
         def refreshable = new DefaultRefreshableKeyValueStore(factory)
 
         // when
-        def backingMap2 = [b: 'bv'] as TreeMap
+        def backingMap2 = [b: 'bv']
         when(factory.produce()).thenReturn(backingMap2 as InMemoryKeyValueStore)
         refreshable.refresh()
 

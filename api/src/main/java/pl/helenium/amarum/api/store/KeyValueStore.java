@@ -1,10 +1,10 @@
 package pl.helenium.amarum.api.store;
 
-import java.util.NavigableSet;
+import java.util.Set;
 
 public interface KeyValueStore {
 
-    NavigableSet<String> getAllKeys();
+    Set<String> getAllKeys();
 
     String getValue(String key);
 

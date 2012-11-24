@@ -6,7 +6,7 @@ import pl.helenium.amarum.api.store.KeyValueStore;
 import pl.helenium.amarum.api.store.RefreshableKeyValueStore;
 import pl.helenium.amarum.core.store.AbstractKeyValueStore;
 
-import java.util.NavigableSet;
+import java.util.Set;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -22,7 +22,7 @@ public class DefaultRefreshableKeyValueStore extends AbstractKeyValueStore imple
     }
 
     @Override
-    public NavigableSet<String> getAllKeys() {
+    public Set<String> getAllKeys() {
         return this.keyValueStore.getAllKeys();
     }
 

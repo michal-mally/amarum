@@ -32,7 +32,7 @@ class InMemoryKeyValueStoreTest {
     @Test
     void shallReturnMapWhenGetAll() {
         // given
-        def keyValueStoreMap = [someKey: "someValue"] as TreeMap
+        def keyValueStoreMap = [someKey: "someValue"]
         def keyValueStore = new InMemoryKeyValueStore(keyValueStoreMap)
 
         // when

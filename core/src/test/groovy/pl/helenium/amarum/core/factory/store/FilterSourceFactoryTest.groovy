@@ -64,7 +64,7 @@ class FilterKeyValueStoreFactoryTest {
     @Test
     void shallReturnAllKeysIfPatternAcceptsAll() {
         // given
-        def backingMap = [a: 'av', b: 'bv', c: 'cv'] as TreeMap
+        def backingMap = [a: 'av', b: 'bv', c: 'cv']
         def backingKeyValueStore = backingMap as InMemoryKeyValueStore
         def backingFactory = new WrappingFactory<KeyValueStore>(backingKeyValueStore)
         def pattern = ~/.*/
@@ -79,7 +79,7 @@ class FilterKeyValueStoreFactoryTest {
     @Test
     void shallKeepAllKeysThatMatchesAtLeastOnePattern() {
         // given
-        def backingMap = [a: 'av', b: 'bv', c: 'cv'] as TreeMap
+        def backingMap = [a: 'av', b: 'bv', c: 'cv']
         def backingKeyValueStore = backingMap as InMemoryKeyValueStore
         def backingFactory = new WrappingFactory<KeyValueStore>(backingKeyValueStore)
         def patterns = [~/a/, ~/b/] as Pattern[]

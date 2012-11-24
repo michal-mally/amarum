@@ -1,7 +1,7 @@
 package pl.helenium.amarum.core.factory.store;
 
-import pl.helenium.amarum.api.factory.Factory;
 import pl.helenium.amarum.api.exception.FactoryException;
+import pl.helenium.amarum.api.factory.Factory;
 
 import java.util.Map;
 import java.util.Properties;

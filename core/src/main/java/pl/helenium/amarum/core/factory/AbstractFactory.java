@@ -3,8 +3,8 @@ package pl.helenium.amarum.core.factory;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.helenium.amarum.api.factory.Factory;
 import pl.helenium.amarum.api.exception.FactoryException;
+import pl.helenium.amarum.api.factory.Factory;
 
 import static org.apache.commons.lang3.Validate.notNull;
 

@@ -8,7 +8,7 @@ import pl.helenium.amarum.core.factory.AbstractFactory;
 import pl.helenium.amarum.core.store.InMemoryKeyValueStore;
 
 import java.util.Map;
-import java.util.NavigableMap;
+import java.util.SortedMap;
 import java.util.TreeMap;
 
 public abstract class AbstractInMemoryKeyValueStoreFactory extends AbstractFactory<KeyValueStore> {
@@ -19,7 +19,7 @@ public abstract class AbstractInMemoryKeyValueStoreFactory extends AbstractFacto
     protected final KeyValueStore doProduce() throws FactoryException {
         try {
             log.debug("Delegating creation of entries to {}.fillEntries()", this.getClass().getSimpleName());
-            final NavigableMap<String, String> entries = new TreeMap<String, String>();
+            final SortedMap<String, String> entries = new TreeMap<String, String>();
             fillEntries(entries);
             log.info("Entries returned by fillEntries(): {}", entries);
             return new InMemoryKeyValueStore(entries);

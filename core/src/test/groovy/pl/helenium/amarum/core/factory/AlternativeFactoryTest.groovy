@@ -1,8 +1,8 @@
 package pl.helenium.amarum.core.factory
 
 import org.testng.annotations.Test
-import pl.helenium.amarum.api.factory.Factory
 import pl.helenium.amarum.api.exception.FactoryException
+import pl.helenium.amarum.api.factory.Factory
 
 import static org.mockito.Mockito.mock
 import static org.mockito.Mockito.when

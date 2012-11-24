@@ -1,17 +1,14 @@
 package pl.helenium.amarum.core.factory.store
 
 import org.testng.annotations.Test
-import pl.helenium.amarum.api.factory.Factory
-
 import pl.helenium.amarum.api.exception.FactoryException
+import pl.helenium.amarum.api.factory.Factory
+import pl.helenium.amarum.api.store.KeyValueStore
 import pl.helenium.amarum.core.factory.WrappingFactory
+import pl.helenium.amarum.core.store.InMemoryKeyValueStore
 
 import static org.mockito.Mockito.mock
 import static org.mockito.Mockito.when
-
-import pl.helenium.amarum.api.store.KeyValueStore
-import pl.helenium.amarum.core.store.InMemoryKeyValueStore
-
 import static pl.helenium.amarum.core.store.KeyValueStoreUtils.asMap
 
 class MergedKeyValueStoreFactoryTest {
@@ -82,7 +79,7 @@ class MergedKeyValueStoreFactoryTest {
     void shallContainEntriesFromAllFactories() {
         // given
         def backingFactories = (1..3).collect {
-            def backingMap = [("key-$it" as String): "value-$it" as String] as TreeMap
+            def backingMap = [("key-$it" as String): "value-$it" as String]
             new WrappingFactory<KeyValueStore>(backingMap as InMemoryKeyValueStore)
         }
         def factory = new MergedKeyValueStoreFactory(backingFactories as Factory[])
@@ -100,7 +97,7 @@ class MergedKeyValueStoreFactoryTest {
     void shallValueFromLastFactoryWinWhenConflictingKeys() {
         // given
         def backingFactories = (1..3).collect {
-            def backingMap = [key: "value-$it" as String] as TreeMap
+            def backingMap = [key: "value-$it" as String]
             new WrappingFactory<KeyValueStore>(backingMap as InMemoryKeyValueStore)
         }
         def factory = new MergedKeyValueStoreFactory(backingFactories as Factory[])

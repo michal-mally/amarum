@@ -1,7 +1,7 @@
 package pl.helenium.amarum.core.builder;
 
-import pl.helenium.amarum.api.factory.Factory;
 import pl.helenium.amarum.api.exception.BuildException;
+import pl.helenium.amarum.api.factory.Factory;
 import pl.helenium.amarum.core.factory.properties.InputStreamPropertiesFactory;
 import pl.helenium.amarum.core.factory.properties.SystemPropertiesFactory;
 
