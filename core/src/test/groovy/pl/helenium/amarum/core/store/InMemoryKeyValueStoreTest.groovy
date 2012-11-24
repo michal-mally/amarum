@@ -20,7 +20,7 @@ class InMemoryKeyValueStoreTest {
     @Test(expectedExceptions = UnsupportedOperationException.class)
     void setReturnedByGetAllKeysShallNotBeModifiable() {
         // given
-        def keyValueStore = new InMemoryKeyValueStore()
+        def keyValueStore = new InMemoryKeyValueStore([:])
 
         // when
         keyValueStore.allKeys.add "key"
