@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -17,10 +16,6 @@ public class InMemoryKeyValueStore extends AbstractKeyValueStore {
 
     public InMemoryKeyValueStore(Map<String, String> map) {
         this.map = notNull(map, "map parameter mustn't be null");
-    }
-
-    public InMemoryKeyValueStore() {
-        this(new TreeMap<String, String>());
     }
 
     @Override
