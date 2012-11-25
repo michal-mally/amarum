@@ -10,9 +10,9 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public class PropertiesKeyValueStoreFactory extends AbstractInMemoryKeyValueStoreFactory {
 
-    private final Factory<Properties> propertiesFactory;
+    private final Factory<? extends Properties> propertiesFactory;
 
-    public PropertiesKeyValueStoreFactory(Factory<Properties> propertiesFactory) {
+    public PropertiesKeyValueStoreFactory(Factory<? extends Properties> propertiesFactory) {
         this.propertiesFactory = notNull(propertiesFactory);
     }
 

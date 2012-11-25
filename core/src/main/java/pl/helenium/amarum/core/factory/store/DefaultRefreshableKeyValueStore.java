@@ -12,11 +12,11 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public class DefaultRefreshableKeyValueStore extends AbstractKeyValueStore implements RefreshableKeyValueStore {
 
-    private final Factory<KeyValueStore> factory;
+    private final Factory<? extends KeyValueStore> factory;
 
     private KeyValueStore keyValueStore;
 
-    public DefaultRefreshableKeyValueStore(Factory<KeyValueStore> factory) throws RefreshException {
+    public DefaultRefreshableKeyValueStore(Factory<? extends KeyValueStore> factory) throws RefreshException {
         this.factory = notNull(factory, "Factory mustn't be null");
         refresh();
     }

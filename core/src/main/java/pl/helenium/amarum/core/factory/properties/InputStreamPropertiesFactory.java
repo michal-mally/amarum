@@ -13,9 +13,9 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public class InputStreamPropertiesFactory extends AbstractFactory<Properties> {
 
-    private final Factory<InputStream> factory;
+    private final Factory<? extends InputStream> factory;
 
-    public InputStreamPropertiesFactory(Factory<InputStream> factory) {
+    public InputStreamPropertiesFactory(Factory<? extends InputStream> factory) {
         this.factory = notNull(factory, "Factory mustn't be null!");
     }
 

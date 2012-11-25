@@ -15,11 +15,11 @@ public class FilterKeyValueStoreFactory extends AbstractInMemoryKeyValueStoreFac
     @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(FilterKeyValueStoreFactory.class);
 
-    private final Factory<KeyValueStore> factory;
+    private final Factory<? extends KeyValueStore> factory;
 
     private final Pattern[] patterns;
 
-    public FilterKeyValueStoreFactory(Factory<KeyValueStore> factory, Pattern... patterns) {
+    public FilterKeyValueStoreFactory(Factory<? extends KeyValueStore> factory, Pattern... patterns) {
         this.factory = notNull(factory);
         this.patterns = noNullElements(notEmpty(patterns));
     }

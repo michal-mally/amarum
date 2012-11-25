@@ -15,9 +15,9 @@ public class AlternativeFactory<T> extends AbstractFactory<T> {
     @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(AlternativeFactory.class);
 
-    private final Factory<T>[] factories;
+    private final Factory<? extends T>[] factories;
 
-    public AlternativeFactory(Factory<T>... factories) {
+    public AlternativeFactory(Factory<? extends T>... factories) {
         notEmpty(factories);
         noNullElements(factories);
         this.factories = factories;
@@ -26,7 +26,7 @@ public class AlternativeFactory<T> extends AbstractFactory<T> {
 
     @Override
     public T doProduce() throws FactoryException {
-        for (Factory<T> factory : factories) {
+        for (Factory<? extends T> factory : factories) {
             try {
                 log.debug("Trying to create product using Factory: {}", factory);
 

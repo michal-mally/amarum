@@ -12,15 +12,15 @@ import java.util.regex.Pattern;
 
 public class KeyValueStoreFactoryBuilder extends AbstractBuilder<KeyValueStoreFactoryBuilder>{
 
-    public Factory<KeyValueStore> fromProperties(Factory<Properties> factory) throws BuildException {
+    public Factory<KeyValueStore> fromProperties(Factory<? extends Properties> factory) throws BuildException {
         return configure(new PropertiesKeyValueStoreFactory(factory));
     }
 
-    public Factory<KeyValueStore> filter(Factory<KeyValueStore> factory, Pattern... patterns) throws BuildException {
+    public Factory<KeyValueStore> filter(Factory<? extends KeyValueStore> factory, Pattern... patterns) throws BuildException {
         return configure(new FilterKeyValueStoreFactory(factory, patterns));
     }
 
-    public Factory<KeyValueStore> merge(Factory<KeyValueStore>... factories) throws BuildException {
+    public Factory<KeyValueStore> merge(Factory<? extends KeyValueStore>... factories) throws BuildException {
         return configure(new MergedKeyValueStoreFactory(factories));
     }
 

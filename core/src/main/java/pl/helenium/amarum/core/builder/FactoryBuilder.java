@@ -7,7 +7,7 @@ import pl.helenium.amarum.core.factory.WrappingFactory;
 
 public class FactoryBuilder extends AbstractBuilder<FactoryBuilder> {
 
-    public <T> Factory<T> fromAlternative(Factory<T>... factories) throws BuildException {
+    public <T> Factory<T> fromAlternative(Factory<? extends T>... factories) throws BuildException {
         return configure(new AlternativeFactory<T>(factories));
     }
 

@@ -1,52 +1,39 @@
 package pl.helenium.amarum.core.builder
 
+import org.apache.commons.lang3.RandomStringUtils
 import org.testng.annotations.Test
-import pl.helenium.amarum.api.exception.BuildException
 
 import static pl.helenium.amarum.core.builder.Builders.build
 
-class InputStreamFactoryBuilderTest {
+class InputStreamFactoryBuilderTest extends AbstractBuildersTest {
 
-    @Test(expectedExceptions = BuildException.class)
-    void shallThrowBuildExceptionWhenSettingNonExistingPropertyWithIgnoreFlagSetToFalse() {
-        // given
-        build().inputStreamFactory()
-                .with("non-existing", "value")
+    private static final def CLASSPATH_RESOURCE = "/test.properties"
 
-        // when
-                .fromClasspath("test.properties")
-
-        // then
-        // exception expected
-    }
+    private static final def RESOURCE_CONTENT = InputStreamFactoryBuilderTest.class.getResourceAsStream(CLASSPATH_RESOURCE).text
 
     @Test
-    void shallIgnoreNonExistingPropertyWithIgnoreFlagSetToTrue() {
-        // given
-        def factory = build().inputStreamFactory()
-                .ignoreNonExistingProperties()
-                .with("non-existing", "value")
-
-        // when
-                .fromClasspath("/test.properties")
-
-        // then
-        assert factory.produce()
-    }
-
-    @Test
-    void shallProduceInputStreamConnectedToPointedResource() {
+    void shallProduceInputStreamConnectedToExistingResource() {
         // given
         def factory = build().inputStreamFactory()
 
         // when
-                .fromClasspath('/test.properties')
+                .fromClasspath(CLASSPATH_RESOURCE)
 
         // then
-        assert factory.produce().text == """property1.x=p1v
-property1.y=p1y
-property2.x=p2x
-"""
+        assert factory.produce().text == RESOURCE_CONTENT
+    }
+
+    @Test
+    void shallProduceInputStreamConnectedToExistingFile() {
+        // given
+        def file = File.createTempFile(RandomStringUtils.randomAlphabetic(10), ".properties")
+        file.text = RESOURCE_CONTENT
+
+        // when
+        def factory = build().inputStreamFactory().fromFile(file.absolutePath)
+
+        // then
+        assert factory.produce().text == RESOURCE_CONTENT
     }
 
 }

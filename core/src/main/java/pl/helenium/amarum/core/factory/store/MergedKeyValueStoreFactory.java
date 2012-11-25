@@ -16,15 +16,15 @@ public class MergedKeyValueStoreFactory extends AbstractInMemoryKeyValueStoreFac
     @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(MergedKeyValueStoreFactory.class);
 
-    private final Factory<KeyValueStore>[] factories;
+    private final Factory<? extends KeyValueStore>[] factories;
 
-    public MergedKeyValueStoreFactory(Factory<KeyValueStore>... factories) {
+    public MergedKeyValueStoreFactory(Factory<? extends KeyValueStore>... factories) {
         this.factories = noNullElements(notNull(factories));
     }
 
     @Override
     protected void fillEntries(Map<String, String> entries) throws Exception {
-        for (Factory<KeyValueStore> factory : factories) {
+        for (Factory<? extends KeyValueStore> factory : factories) {
             entries.putAll(asMap(factory.produce()));
         }
     }

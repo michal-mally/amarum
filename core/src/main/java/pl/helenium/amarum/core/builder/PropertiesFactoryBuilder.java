@@ -14,7 +14,7 @@ public class PropertiesFactoryBuilder extends AbstractBuilder<PropertiesFactoryB
         return configure(new SystemPropertiesFactory());
     }
 
-    public Factory<Properties> fromInputStreamFactory(Factory<InputStream> factory) throws BuildException {
+    public Factory<Properties> fromInputStreamFactory(Factory<? extends InputStream> factory) throws BuildException {
         return configure(new InputStreamPropertiesFactory(factory));
     }
 
