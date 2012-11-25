@@ -24,6 +24,10 @@ public final class Builders extends AbstractBuilder<Builders> {
         return configure(new KeyValueStoreFactoryBuilder());
     }
 
+    public KeyValueStoreBuilder keyValueStore() throws BuildException {
+        return configure(new KeyValueStoreBuilder());
+    }
+
     @Override
     protected Builders getThis() {
         return this;
