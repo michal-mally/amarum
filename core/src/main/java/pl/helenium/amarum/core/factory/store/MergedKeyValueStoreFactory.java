@@ -9,6 +9,7 @@ import java.util.Map;
 
 import static org.apache.commons.lang3.Validate.noNullElements;
 import static org.apache.commons.lang3.Validate.notNull;
+import static pl.helenium.amarum.core.store.KeyValueStoreUtils.asMap;
 
 public class MergedKeyValueStoreFactory extends AbstractInMemoryKeyValueStoreFactory {
 
@@ -24,10 +25,7 @@ public class MergedKeyValueStoreFactory extends AbstractInMemoryKeyValueStoreFac
     @Override
     protected void fillEntries(Map<String, String> entries) throws Exception {
         for (Factory<KeyValueStore> factory : factories) {
-            final KeyValueStore keyValueStore = factory.produce();
-            for (final String key : keyValueStore.getAllKeys()) {
-                entries.put(key, keyValueStore.getValue(key));
-            }
+            entries.putAll(asMap(factory.produce()));
         }
     }
 
