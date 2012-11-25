@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 public class KeyValueStoreFactoryBuilder extends AbstractBuilder<KeyValueStoreFactoryBuilder>{
 
-    public Factory<KeyValueStore> fromProperties(Factory<? extends Properties> factory) throws BuildException {
+    public Factory<KeyValueStore> fromPropertiesFactory(Factory<? extends Properties> factory) throws BuildException {
         return configure(new PropertiesKeyValueStoreFactory(factory));
     }
 

@@ -5,7 +5,7 @@ import org.testng.annotations.Test
 
 import static pl.helenium.amarum.core.builder.Builders.build
 
-class InputStreamFactoryBuilderTest extends AbstractBuildersTest {
+class InputStreamFactoryBuilderTest {
 
     private static final def CLASSPATH_RESOURCE = "/test.properties"
 

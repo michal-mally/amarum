@@ -3,9 +3,8 @@ package pl.helenium.amarum.core.builder
 import org.testng.annotations.Test
 
 import static pl.helenium.amarum.core.builder.Builders.build
-import pl.helenium.amarum.api.exception.BuildException
 
-class PropertiesFactoryBuilderTest extends AbstractBuildersTest {
+class PropertiesFactoryBuilderTest {
 
     @Test
     void shallConstructPropertiesFactoryFromInputStreamFactory() {
