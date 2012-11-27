@@ -7,17 +7,18 @@ import pl.helenium.amarum.core.factory.WrappingFactory
 
 import static org.mockito.Mockito.mock
 import static org.mockito.Mockito.when
+import static pl.helenium.amarum.core.builder.Builders.build
 import static pl.helenium.amarum.core.store.KeyValueStoreUtils.asMap
 
 class PropertiesKeyValueStoreFactoryTest {
 
-    @Test(expectedExceptions = NullPointerException.class)
+    @Test(expectedExceptions = FactoryException.class)
     void shallThrowExceptionWhenNullFactoryIsPassed() {
         // given
         def propertiesFactory = null
 
         // when
-        new PropertiesKeyValueStoreFactory(propertiesFactory)
+        build().keyValueStoreFactory().fromPropertiesFactory(null).produce()
 
         // then
         // exception expected
@@ -29,7 +30,7 @@ class PropertiesKeyValueStoreFactoryTest {
         def propertiesFactory = mock(Factory.class)
         when(propertiesFactory.produce()).thenThrow(new RuntimeException())
 
-        def factory = new PropertiesKeyValueStoreFactory(propertiesFactory);
+        def factory = build().keyValueStoreFactory().fromPropertiesFactory(propertiesFactory);
 
         // when
         factory.produce()
@@ -46,7 +47,7 @@ class PropertiesKeyValueStoreFactoryTest {
         map.each { k, v -> properties.setProperty(k, v) }
 
         // when
-        def factory = new PropertiesKeyValueStoreFactory(properties as WrappingFactory)
+        def factory = build().keyValueStoreFactory().fromPropertiesFactory(properties as WrappingFactory)
 
         // then
         assert asMap(factory.produce()) == map

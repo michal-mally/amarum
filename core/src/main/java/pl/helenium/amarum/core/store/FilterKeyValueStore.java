@@ -1,6 +1,7 @@
 package pl.helenium.amarum.core.store;
 
 import pl.helenium.amarum.api.store.KeyValueStore;
+import pl.helenium.amarum.core.annotation.FactoryConstructor;
 
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,7 @@ public class FilterKeyValueStore extends AbstractKeyValueStore {
 
     private final List<Pattern> patterns;
 
+    @FactoryConstructor
     public FilterKeyValueStore(KeyValueStore store, Pattern... patterns) {
         this.store = notNull(store);
         this.patterns = asList(noNullElements(notEmpty(notNull(patterns))));

@@ -1,6 +1,7 @@
 package pl.helenium.amarum.core.store;
 
 import pl.helenium.amarum.api.store.KeyValueStore;
+import pl.helenium.amarum.core.annotation.FactoryConstructor;
 
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,7 @@ public class MergeKeyValueStore extends AbstractKeyValueStore {
 
     private final List<KeyValueStore> keyValueStores;
 
+    @FactoryConstructor
     public MergeKeyValueStore(KeyValueStore... keyValueStores) {
         this.keyValueStores = asList(noNullElements(notNull(keyValueStores)));
         reverse(this.keyValueStores);

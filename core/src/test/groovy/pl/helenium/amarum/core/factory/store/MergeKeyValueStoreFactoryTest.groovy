@@ -9,6 +9,7 @@ import pl.helenium.amarum.core.store.InMemoryKeyValueStore
 
 import static org.mockito.Mockito.mock
 import static org.mockito.Mockito.when
+import static pl.helenium.amarum.core.builder.Builders.build
 import static pl.helenium.amarum.core.store.KeyValueStoreUtils.asMap
 
 class MergeKeyValueStoreFactoryTest {
@@ -18,29 +19,29 @@ class MergeKeyValueStoreFactoryTest {
         // given
 
         // when
-        def factory = new MergeKeyValueStoreFactory()
+        def factory = build().keyValueStoreFactory().merge()
 
         // then
         assert asMap(factory.produce()) == [:]
     }
 
     @Test(expectedExceptions = NullPointerException.class)
-    void shallThrowFactoryExceptionWhenNullPassedInsteadOfListOfFactories() {
+    void shallThrowNullPointerExceptionWhenNullPassedInsteadOfListOfFactories() {
         // given
 
         // when
-        new MergeKeyValueStoreFactory(null)
+        build().keyValueStoreFactory().merge(null).produce()
 
         // then
         // exception expected
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = FactoryException.class)
     void shallThrowFactoryExceptionWhenAnyOfFactoriesIsNull() {
         // given
 
         // when
-        new MergeKeyValueStoreFactory([null] as Factory[])
+        build().keyValueStoreFactory().merge([null] as Factory[]).produce()
 
         // then
         // exception expected
@@ -54,7 +55,7 @@ class MergeKeyValueStoreFactoryTest {
         def failingFactory = mock(Factory.class)
         when(failingFactory.produce()).thenThrow(new RuntimeException())
 
-        def factory = new MergeKeyValueStoreFactory(okFactory, failingFactory, okFactory)
+        def factory = build().keyValueStoreFactory().merge(okFactory, failingFactory, okFactory)
 
         // when
         factory.produce()
@@ -69,7 +70,7 @@ class MergeKeyValueStoreFactoryTest {
         def backingFactory = new WrappingFactory<KeyValueStore>([a: 'b'] as InMemoryKeyValueStore)
 
         // when
-        def factory = new MergeKeyValueStoreFactory(backingFactory)
+        def factory = build().keyValueStoreFactory().merge(backingFactory)
 
         // then
         assert asMap(factory.produce()) == asMap(backingFactory.produce())
@@ -82,7 +83,7 @@ class MergeKeyValueStoreFactoryTest {
             def backingMap = [("key-$it" as String): "value-$it" as String]
             new WrappingFactory<KeyValueStore>(backingMap as InMemoryKeyValueStore)
         }
-        def factory = new MergeKeyValueStoreFactory(backingFactories as Factory[])
+        def factory = build().keyValueStoreFactory().merge(backingFactories as Factory[])
 
         // when
         def keyValueStore = factory.produce()
@@ -100,7 +101,7 @@ class MergeKeyValueStoreFactoryTest {
             def backingMap = [key: "value-$it" as String]
             new WrappingFactory<KeyValueStore>(backingMap as InMemoryKeyValueStore)
         }
-        def factory = new MergeKeyValueStoreFactory(backingFactories as Factory[])
+        def factory = build().keyValueStoreFactory().merge(backingFactories as Factory[])
 
         // when
         def keyValueStore = factory.produce()
