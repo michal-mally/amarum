@@ -11,14 +11,14 @@ import static org.mockito.Mockito.mock
 import static org.mockito.Mockito.when
 import static pl.helenium.amarum.core.store.KeyValueStoreUtils.asMap
 
-class MergedKeyValueStoreFactoryTest {
+class MergeKeyValueStoreFactoryTest {
 
     @Test
     void shallReturnEmptyKeyValueStoreWhenNoFactoryIsPassed() {
         // given
 
         // when
-        def factory = new MergedKeyValueStoreFactory()
+        def factory = new MergeKeyValueStoreFactory()
 
         // then
         assert asMap(factory.produce()) == [:]
@@ -29,7 +29,7 @@ class MergedKeyValueStoreFactoryTest {
         // given
 
         // when
-        new MergedKeyValueStoreFactory(null)
+        new MergeKeyValueStoreFactory(null)
 
         // then
         // exception expected
@@ -40,7 +40,7 @@ class MergedKeyValueStoreFactoryTest {
         // given
 
         // when
-        new MergedKeyValueStoreFactory([null] as Factory[])
+        new MergeKeyValueStoreFactory([null] as Factory[])
 
         // then
         // exception expected
@@ -54,7 +54,7 @@ class MergedKeyValueStoreFactoryTest {
         def failingFactory = mock(Factory.class)
         when(failingFactory.produce()).thenThrow(new RuntimeException())
 
-        def factory = new MergedKeyValueStoreFactory(okFactory, failingFactory, okFactory)
+        def factory = new MergeKeyValueStoreFactory(okFactory, failingFactory, okFactory)
 
         // when
         factory.produce()
@@ -69,7 +69,7 @@ class MergedKeyValueStoreFactoryTest {
         def backingFactory = new WrappingFactory<KeyValueStore>([a: 'b'] as InMemoryKeyValueStore)
 
         // when
-        def factory = new MergedKeyValueStoreFactory(backingFactory)
+        def factory = new MergeKeyValueStoreFactory(backingFactory)
 
         // then
         assert asMap(factory.produce()) == asMap(backingFactory.produce())
@@ -82,7 +82,7 @@ class MergedKeyValueStoreFactoryTest {
             def backingMap = [("key-$it" as String): "value-$it" as String]
             new WrappingFactory<KeyValueStore>(backingMap as InMemoryKeyValueStore)
         }
-        def factory = new MergedKeyValueStoreFactory(backingFactories as Factory[])
+        def factory = new MergeKeyValueStoreFactory(backingFactories as Factory[])
 
         // when
         def keyValueStore = factory.produce()
@@ -94,13 +94,13 @@ class MergedKeyValueStoreFactoryTest {
     }
 
     @Test
-    void shallValueFromLastFactoryWinWhenConflictingKeys() {
+    void shallReturnValueFromLastFactoryWinWhenConflictingKeys() {
         // given
         def backingFactories = (1..3).collect {
             def backingMap = [key: "value-$it" as String]
             new WrappingFactory<KeyValueStore>(backingMap as InMemoryKeyValueStore)
         }
-        def factory = new MergedKeyValueStoreFactory(backingFactories as Factory[])
+        def factory = new MergeKeyValueStoreFactory(backingFactories as Factory[])
 
         // when
         def keyValueStore = factory.produce()

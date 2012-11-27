@@ -4,7 +4,7 @@ import pl.helenium.amarum.api.exception.BuildException;
 import pl.helenium.amarum.api.factory.Factory;
 import pl.helenium.amarum.api.store.KeyValueStore;
 import pl.helenium.amarum.core.factory.store.FilterKeyValueStoreFactory;
-import pl.helenium.amarum.core.factory.store.MergedKeyValueStoreFactory;
+import pl.helenium.amarum.core.factory.store.MergeKeyValueStoreFactory;
 import pl.helenium.amarum.core.factory.store.PropertiesKeyValueStoreFactory;
 
 import java.util.Properties;
@@ -21,7 +21,7 @@ public class KeyValueStoreFactoryBuilder extends AbstractBuilder<KeyValueStoreFa
     }
 
     public Factory<KeyValueStore> merge(Factory<? extends KeyValueStore>... factories) throws BuildException {
-        return configure(new MergedKeyValueStoreFactory(factories));
+        return configure(new MergeKeyValueStoreFactory(factories));
     }
 
     @Override

@@ -2,13 +2,16 @@ package pl.helenium.amarum.core.factory.store;
 
 import pl.helenium.amarum.api.exception.FactoryException;
 import pl.helenium.amarum.api.factory.Factory;
+import pl.helenium.amarum.api.store.KeyValueStore;
+import pl.helenium.amarum.core.factory.AbstractFactory;
+import pl.helenium.amarum.core.store.PropertiesKeyValueStore;
 
 import java.util.Map;
 import java.util.Properties;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
-public class PropertiesKeyValueStoreFactory extends AbstractInMemoryKeyValueStoreFactory {
+public class PropertiesKeyValueStoreFactory extends AbstractFactory<KeyValueStore> {
 
     private final Factory<? extends Properties> propertiesFactory;
 
@@ -17,11 +20,7 @@ public class PropertiesKeyValueStoreFactory extends AbstractInMemoryKeyValueStor
     }
 
     @Override
-    protected void fillEntries(Map<String, String> entries) throws FactoryException {
-        final Properties properties = this.propertiesFactory.produce();
-        for (final String propName : properties.stringPropertyNames()) {
-            entries.put(propName, properties.getProperty(propName));
-        }
+    protected KeyValueStore doProduce() throws FactoryException {
+        return new PropertiesKeyValueStore(this.propertiesFactory.produce());
     }
-
 }

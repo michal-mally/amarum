@@ -2,15 +2,17 @@ package pl.helenium.amarum.core.factory.store;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pl.helenium.amarum.api.exception.FactoryException;
 import pl.helenium.amarum.api.factory.Factory;
 import pl.helenium.amarum.api.store.KeyValueStore;
+import pl.helenium.amarum.core.factory.AbstractFactory;
+import pl.helenium.amarum.core.store.FilterKeyValueStore;
 
-import java.util.Map;
 import java.util.regex.Pattern;
 
 import static org.apache.commons.lang3.Validate.*;
 
-public class FilterKeyValueStoreFactory extends AbstractInMemoryKeyValueStoreFactory {
+public class FilterKeyValueStoreFactory extends AbstractFactory<KeyValueStore> {
 
     @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(FilterKeyValueStoreFactory.class);
@@ -25,17 +27,8 @@ public class FilterKeyValueStoreFactory extends AbstractInMemoryKeyValueStoreFac
     }
 
     @Override
-    protected void fillEntries(Map<String, String> entries) throws Exception {
-        final KeyValueStore keyValueStore = this.factory.produce();
-        for (final String key : keyValueStore.getAllKeys()) {
-            for (final Pattern pattern : this.patterns) {
-                if (pattern.matcher(key).matches()) {
-                    log.debug("Key {} matches pattern {} - adding to the map.", key, pattern);
-                    entries.put(key, keyValueStore.getValue(key));
-                    break;
-                }
-            }
-        }
+    protected KeyValueStore doProduce() throws FactoryException {
+        return new FilterKeyValueStore(factory.produce(), this.patterns);
     }
 
 }
